@@ -24,17 +24,12 @@ import re
 import mxnet as mx
 from mxnet.gluon.block import HybridBlock
 from mxnet.gluon import nn
-
-__all__ = ['efficientnet_b0',
-           'efficientnet_b1',
-           'efficientnet_b2',
-           'efficientnet_b3',
-           'efficientnet_b4', 
-           'efficientnet_b5',
-           'efficientnet_b6',
-           'efficientnet_b7']
-
 # Parameters for the entire model (stem, all blocks, and head)
+
+__all__ = ['efficientnet_b0', 'efficientnet_b1', 'efficientnet_b2', 
+           'efficientnet_b3', 'efficientnet_b4', 'efficientnet_b5', 
+           'efficientnet_b6', 'efficientnet_b7']
+
 GlobalParams = collections.namedtuple('GlobalParams', [
     'dropout_rate', 'num_classes', 'width_coefficient', 'depth_coefficient',
     'depth_divisor', 'min_depth', 'drop_connect_rate', ])
