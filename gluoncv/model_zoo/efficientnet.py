@@ -141,8 +141,10 @@ class BlockDecoder(object):
         return block_strings
 
 
-def efficientnet_param(width_coefficient=None, depth_coefficient=None,
-                 dropout_rate=0.2, drop_connect_rate=0.2):
+def efficientnet_param(width_coefficient=None, 
+                       depth_coefficient=None,
+                       dropout_rate=0.2,
+                       drop_connect_rate=0.2):
     """ Creates a efficientnet model. """
 
     blocks_args = [
