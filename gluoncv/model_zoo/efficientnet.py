@@ -439,3 +439,67 @@ def efficientnet(model_name, return_input_resolution=False):
     if return_input_resolution:
         return model, input_resolution
     return model
+
+
+def efficientnet_b0(pretrained=False):
+    if pretrained:
+        pass
+    model, input_size = efficientnet('efficientnet_b0')
+    model.input_size = input_size
+    return model
+
+
+def efficientnet_b1(pretrained=False):
+    if pretrained:
+        pass
+    model, input_size = efficientnet('efficientnet_b1')
+    model.input_size = input_size
+    return model
+
+
+def efficientnet_b2(pretrained=False):
+    if pretrained:
+        pass
+    model, input_size = efficientnet('efficientnet_b2')
+    model.input_size = input_size
+    return model
+
+
+def efficientnet_b3(pretrained=False):
+    if pretrained:
+        pass
+    model, input_size = efficientnet('efficientnet_b3')
+    model.input_size = input_size
+    return model
+
+
+def efficientnet_b4(pretrained=False):
+    if pretrained:
+        pass
+    model, input_size = efficientnet('efficientnet_b4')
+    model.input_size = input_size
+    return model
+
+
+def efficientnet_b5(pretrained=False):
+    if pretrained:
+        pass
+    model, input_size = efficientnet('efficientnet_b5')
+    model.input_size = input_size
+    return model
+
+
+def efficientnet_b6(pretrained=False):
+    if pretrained:
+        pass
+    model, input_size = efficientnet('efficientnet_b6')
+    model.input_size = input_size
+    return model
+
+
+def efficientnet_b7(pretrained=False):
+    if pretrained:
+        pass
+    model, input_size = efficientnet('efficientnet_b7')
+    model.input_size = input_size
+    return model
