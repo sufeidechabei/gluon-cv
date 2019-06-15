@@ -212,7 +212,14 @@ _models = {
     'ssd_512_mobilenet1.0_voc_int8': ssd_512_mobilenet1_0_voc_int8,
     'ssd_512_resnet50_v1_voc_int8': ssd_512_resnet50_v1_voc_int8,
     'ssd_512_vgg16_atrous_voc_int8': ssd_512_vgg16_atrous_voc_int8,
-    'efficientnet': efficientnet
+    'efficientnet_b0': efficientnet_b0,
+    'efficientnet_b1': efficientnet_b1,
+    'efficientnet_b2': efficientnet_b2,
+    'efficientnet_b3': efficientnet_b3,
+    'efficientnet_b4': efficientnet_b4,
+    'efficientnet_b5': efficientnet_b5,
+    'efficientnet_b6': efficientnet_b6,
+    'efficientnet_b7': efficientnet_b7,
 }
 
 
