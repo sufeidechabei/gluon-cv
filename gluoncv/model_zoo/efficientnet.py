@@ -25,15 +25,12 @@ import mxnet as mx
 from mxnet.gluon.block import HybridBlock
 from mxnet.gluon import nn
 
-
-
 __all__ = ['efficientnet']
 
 # Parameters for the entire model (stem, all blocks, and head)
 GlobalParams = collections.namedtuple('GlobalParams', [
     'dropout_rate', 'num_classes', 'width_coefficient', 'depth_coefficient',
     'depth_divisor', 'min_depth', 'drop_connect_rate', ])
-
 
 # Parameters for an individual model block
 BlockArgs = collections.namedtuple('BlockArgs', [
@@ -84,7 +81,7 @@ class BlockDecoder(object):
 
         # Check stride
         assert (('s' in options and len(options['s']) == 1) or (
-            len(options['s']) == 2 and options['s'][0] == options['s'][1]))
+                len(options['s']) == 2 and options['s'][0] == options['s'][1]))
 
         return BlockArgs(
             kernel_size=int(options['k']),
@@ -139,7 +136,7 @@ class BlockDecoder(object):
         for block in blocks_args:
             block_strings.append(BlockDecoder._encode_block_string(block))
         return block_strings
-
+    
     
 def efficientnet_param(width_coefficient=None, depth_coefficient=None,
                        dropout_rate=0.2,
@@ -168,7 +165,6 @@ def efficientnet_param(width_coefficient=None, depth_coefficient=None,
 
 
 def drop_connect(x, p, training):
-
     ''' Just to consist of the tensorflow implementation. '''
 
     if not training:
@@ -187,9 +183,9 @@ class SamePadding(HybridBlock):
     def __init__(self, kernel_size, stride, dilation, **kwargs):
         super(SamePadding, self).__init__(**kwargs)
         if isinstance(kernel_size, int):
-            kernel_size = (kernel_size, ) * 2
+            kernel_size = (kernel_size,) * 2
         if isinstance(stride, int):
-            stride = (stride, ) * 2
+            stride = (stride,) * 2
         self.kernel_size = kernel_size
         self.stride = stride
         self.dilation = dilation
@@ -393,7 +389,7 @@ class EfficientNet(nn.HybridBlock):
                                 block_arg.se_ratio,
                                 global_params.drop_connect_rate))
 
-           # Head
+            # Head
             out_channels = round_filters(1280, self._global_params)
             self._conv_head = nn.HybridSequential(prefix='conv_head_')
             with self._conv_head.name_scope():
@@ -426,7 +422,6 @@ class EfficientNet(nn.HybridBlock):
 
 
 def efficientnet(model_name, return_input_resolution=False):
-
     params_dict = {  # (width_coefficient, depth_coefficient, input_resolution, dropout_rate)
         'efficientnet-b0': (1.0, 1.0, 224, 0.2),
         'efficientnet-b1': (1.0, 1.1, 240, 0.2),
