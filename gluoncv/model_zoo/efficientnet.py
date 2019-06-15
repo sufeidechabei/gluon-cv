@@ -140,6 +140,7 @@ class BlockDecoder(object):
             block_strings.append(BlockDecoder._encode_block_string(block))
         return block_strings
 
+    
 def efficientnet_param(width_coefficient=None, 
                        depth_coefficient=None,
                        dropout_rate=0.2,
@@ -424,6 +425,7 @@ class EfficientNet(nn.HybridBlock):
             x = F.Dropout(x, self._dropout)
         x = self._fc(x)
         return x
+
     
 def efficientnet(model_name, return_input_resolution=False):
 
