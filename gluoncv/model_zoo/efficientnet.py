@@ -19,9 +19,9 @@
 # pylint: disable= arguments-differ,unused-argument,missing-docstring
 
 import math
-import mxnet as mx
 import collections
 import re
+import mxnet as mx
 from mxnet.gluon.block import HybridBlock
 from mxnet.gluon import nn
 
@@ -177,10 +177,7 @@ def drop_connect(x, p, training):
     keep_prob = 1 - p
     random_tensor = keep_prob
     random_tensor += mx.nd.random.uniform(
-        shape=[
-            batch_size, 1, 1, 1]).astype(
-        x.dtype).as_in_context(
-                x.context)  # uniform [0,1)
+        shape=[batch_size, 1, 1, 1]).astype(x.dtype).as_in_context(x.context)  # uniform [0,1)
     binary_tensor = mx.nd.floor(random_tensor)
     output = x / keep_prob * binary_tensor
     return output
@@ -315,8 +312,8 @@ class MBConv(nn.HybridBlock):
                     active=False,
                     batchnorm=True)
 
-    def hybrid_forward(self, F, input):
-        x = input
+    def hybrid_forward(self, F, inputs):
+        x = inputs
         x = self.out(x)
         if self.se_ratio:
             out = mx.nd.contrib.AdaptiveAvgPooling2D(x, 1)
@@ -329,7 +326,7 @@ class MBConv(nn.HybridBlock):
                     out,
                     p=self.drop_connect_rate,
                     training=self.training)
-            out = F.elemwise_add(out, input)
+            out = F.elemwise_add(out, inputs)
         return out
 
     def get_mode(self, training):
@@ -369,8 +366,10 @@ class EfficientNet(nn.HybridBlock):
                     # multiplier.
                     block_arg = block_arg._replace(
                         input_filters=round_filters(
-                            block_arg.input_filters, self._global_params), output_filters=round_filters(
-                            block_arg.output_filters, self._global_params), num_repeat=round_repeats(
+                            block_arg.input_filters, self._global_params),
+                        output_filters=round_filters(
+                            block_arg.output_filters, self._global_params),
+                        num_repeat=round_repeats(
                             block_arg.num_repeat, self._global_params))
                     self._blocks.add(MBConv(block_arg.input_filters,
                                             block_arg.output_filters,
@@ -426,7 +425,7 @@ class EfficientNet(nn.HybridBlock):
         return x
 
 
-def efficientnet(model_name, return_input_resolution = False):
+def efficientnet(model_name, return_input_resolution=False):
 
     params_dict = {  # (width_coefficient, depth_coefficient, input_resolution, dropout_rate)
         'efficientnet-b0': (1.0, 1.0, 224, 0.2),
@@ -439,7 +438,7 @@ def efficientnet(model_name, return_input_resolution = False):
         'efficientnet-b7': (2.0, 3.1, 600, 0.5)
     }
     width_coeff, depth_coeff, input_resolution, dropout_rate = params_dict[model_name]
-    blocks_args, global_params = efficientnet(width_coeff, depth_coeff)
+    blocks_args, global_params = efficientnet(width_coeff, depth_coeff, dropout_rate=dropout_rate)
     model = EfficientNet(blocks_args, global_params)
     if return_input_resolution:
        return model, input_resolution
