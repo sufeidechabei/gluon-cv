@@ -137,8 +137,8 @@ class BlockDecoder(object):
         for block in blocks_args:
             block_strings.append(BlockDecoder._encode_block_string(block))
         return block_strings
-    
-    
+
+
 def efficientnet_param(width_coefficient=None, depth_coefficient=None,
                        dropout_rate=0.2,
                        drop_connect_rate=0.2):
