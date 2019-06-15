@@ -425,7 +425,7 @@ class EfficientNet(nn.HybridBlock):
         return x
 
 
-def efficientnet(model_name, return_input_resolution=False):
+def efficientnet(model_name, return_input_resolution=True):
     params_dict = {  # (width_coefficient, depth_coefficient, input_resolution, dropout_rate)
         'efficientnet-b0': (1.0, 1.0, 224, 0.2),
         'efficientnet-b1': (1.0, 1.1, 240, 0.2),
