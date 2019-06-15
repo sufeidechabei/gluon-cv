@@ -138,13 +138,12 @@ class BlockDecoder(object):
         block_strings = []
         for block in blocks_args:
             block_strings.append(BlockDecoder._encode_block_string(block))
-        return block_strings    
+        return block_strings
 def efficientnet_param(width_coefficient=None, 
                        depth_coefficient=None,
                        dropout_rate=0.2,
                        drop_connect_rate=0.2):
     """ Creates a efficientnet model. """
-
     blocks_args = [
         'r1_k3_s11_e1_i32_o16_se0.25', 'r2_k3_s22_e6_i16_o24_se0.25',
         'r2_k5_s22_e6_i24_o40_se0.25', 'r3_k3_s22_e6_i40_o80_se0.25',
