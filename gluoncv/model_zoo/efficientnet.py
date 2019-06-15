@@ -80,8 +80,9 @@ class BlockDecoder(object):
                 options[key] = value
 
         # Check stride
-        assert (('s' in options and len(options['s']) == 1) or (
-                len(options['s']) == 2 and options['s'][0] == options['s'][1]))
+        assert (('s' in options and len(options['s']) == 1) or
+                (len(options['s']) == 2 and
+                 options['s'][0] == options['s'][1]))
 
         return BlockArgs(
             kernel_size=int(options['k']),
