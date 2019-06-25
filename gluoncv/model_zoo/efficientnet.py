@@ -544,7 +544,7 @@ def efficientnet_b2(pretrained=False,
                     depth_divisor=8,
                     min_depth=None,
                     drop_connect_rate=0.2,
-                    ctx = mx.cpu()
+                    ctx=mx.cpu()
                     ):
     r"""EfficientNet model from the
         `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
@@ -585,7 +585,7 @@ def efficientnet_b3(pretrained=False,
                     depth_divisor=8,
                     min_depth=None,
                     drop_connect_rate=0.2,
-                    ctx = mx.cpu()
+                    ctx=mx.cpu()
                     ):
     r"""EfficientNet model from the
         `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
@@ -668,7 +668,7 @@ def efficientnet_b5(pretrained=False,
                     depth_divisor=8,
                     min_depth=None,
                     drop_connect_rate=0.2,
-                    ctx = mx.cpu(),
+                    ctx=mx.cpu(),
                     ):
     r"""EfficientNet model from the
         `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
@@ -709,7 +709,7 @@ def efficientnet_b6(pretrained=False,
                     depth_divisor=8,
                     min_depth=None,
                     drop_connect_rate=0.2,
-                    ctx = mx.cpu()
+                    ctx=mx.cpu()
                     ):
     r"""EfficientNet model from the
         `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
