@@ -487,7 +487,7 @@ def efficientnet_b0(pretrained=False,
             It is used for reducing the number of filters.
         min_depth : int
             Used for deciding the minimum depth of the filters.
-        drop_connect_rate : 
+        drop_connect_rate : float
             Used for dropout.
             To be consistent with the tensorflow implementation.
 
@@ -536,7 +536,7 @@ def efficientnet_b1(pretrained=False,
                 It is used for reducing the number of filters.
             min_depth : int
                 Used for deciding the minimum depth of the filters.
-            drop_connect_rate : 
+            drop_connect_rate : float
                 Used for dropout.
                 To be consistent with the tensorflow implementation.
 
@@ -585,7 +585,7 @@ def efficientnet_b2(pretrained=False,
                 It is used for reducing the number of filters.
             min_depth : int
                 Used for deciding the minimum depth of the filters.
-            drop_connect_rate : 
+            drop_connect_rate : float
                 Used for dropout.
                 To be consistent with the tensorflow implementation.
 
@@ -634,7 +634,7 @@ def efficientnet_b3(pretrained=False,
                 It is used for reducing the number of filters.
             min_depth : int
                 Used for deciding the minimum depth of the filters.
-            drop_connect_rate : 
+            drop_connect_rate : float
                 Used for dropout.
                 To be consistent with the tensorflow implementation.
 
@@ -683,7 +683,7 @@ def efficientnet_b4(pretrained=False,
                 It is used for reducing the number of filters.
             min_depth : int
                 Used for deciding the minimum depth of the filters.
-            drop_connect_rate : 
+            drop_connect_rate : float
                 Used for dropout.
                 To be consistent with the tensorflow implementation.
 
@@ -733,7 +733,7 @@ def efficientnet_b5(pretrained=False,
                 It is used for reducing the number of filters.
             min_depth : int
                 Used for deciding the minimum depth of the filters.
-            drop_connect_rate : 
+            drop_connect_rate : float
                 Used for dropout.
                 To be consistent with the tensorflow implementation.
 
@@ -782,7 +782,7 @@ def efficientnet_b6(pretrained=False,
                 It is used for reducing the number of filters.
             min_depth : int
                 Used for deciding the minimum depth of the filters.
-            drop_connect_rate : 
+            drop_connect_rate : float
                 Used for dropout.
                 To be consistent with the tensorflow implementation.
 
@@ -831,7 +831,7 @@ def efficientnet_b7(pretrained=False,
                 It is used for reducing the number of filters.
             min_depth : int
                 Used for deciding the minimum depth of the filters.
-            drop_connect_rate : 
+            drop_connect_rate : float
                 Used for dropout.
                 To be consistent with the tensorflow implementation.
 
@@ -845,6 +845,6 @@ def efficientnet_b7(pretrained=False,
                          depth_divisor,
                          min_depth,
                          drop_connect_rate,
-                           )
+                        )
     model.collect_params().initialize(ctx=ctx)
     return model
