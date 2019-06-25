@@ -333,12 +333,12 @@ class EfficientNet(nn.HybridBlock):
             blocks_args: nametuple, it concludes the hyperparameters of the MBConv block.
             dropout_rate: float, rate of hidden units to drop.
             num_classes: int, number of output classes.
-            width_coefficient:float, coefficient of the filters used for 
+            width_coefficient:float, coefficient of the filters used for
             expanding or reducing the channels.
             depth_coefficient:float, it is used for repeat the EfficientNet Blocks.
             depth_divisor:int , it is used for reducing the number of filters.
             min_depth: int, used for deciding the minimum depth of the filters.
-            drop_connect_rate: used for dropout, to be consistent with 
+            drop_connect_rate: used for dropout, to be consistent with
             the tensorflow implementation.
 
             """
@@ -467,23 +467,31 @@ def efficientnet_b0(pretrained=False,
                     ctx=mx.cpu()
                     ):
     r"""EfficientNet model from the
-                `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
-                <https://arxiv.org/abs/1905.11946>`_ paper.
+        `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
+        <https://arxiv.org/abs/1905.11946>`_ paper.
 
-                Parameters
-                ----------
-                blocks_args: nametuple, it concludes the hyperparameters of the MBConv block.
-                dropout_rate: float, rate of hidden units to drop.
-                num_classes: int, number of output classes.
-                width_coefficient:float, coefficient of the filters used for 
-                expanding or reducing the channels.
-                depth_coefficient:float, it is used for repeat the EfficientNet Blocks.
-                depth_divisor:int , it is used for reducing the number of filters.
-                min_depth: int, used for deciding the minimum depth of the filters.
-                drop_connect_rate: used for dropout, to be consistent with 
-                the tensorflow implementation.
+        Parameters
+        ----------
+        pretrained : bool or str
+            Boolean value controls whether to load the default pretrained weights for model.
+            String value represents the hashtag for a certain version of pretrained weights.
+        dropout_rate : float
+            Rate of hidden units to drop.
+        classes : int, number of output classes.
+        width_coefficient : float
+            Coefficient of the filters.
+            Used for expanding or reducing the channels.
+        depth_coefficient : float
+            It is used for repeat the EfficientNet Blocks.
+        depth_divisor:int
+            It is used for reducing the number of filters.
+        min_depth : int
+            Used for deciding the minimum depth of the filters.
+        drop_connect_rate : 
+            Used for dropout.
+            To be consistent with the tensorflow implementation.
 
-                """
+        """
     if pretrained:
         pass
     model = efficientnet(dropout_rate,
@@ -508,25 +516,31 @@ def efficientnet_b1(pretrained=False,
                     ctx=mx.cpu(),
                     ):
     r"""EfficientNet model from the
-    `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
-    <https://arxiv.org/abs/1905.11946>`_ paper.
+            `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
+            <https://arxiv.org/abs/1905.11946>`_ paper.
 
-    Parameters
-    ----------
-    pretrained : bool or str
-        Boolean value controls whether to load the default pretrained weights for model.
-        String value represents the hashtag for a certain version of pretrained weights.
-    dropout_rate: float, rate of hidden units to drop.
-    classes: int, number of output classes.
-    width_coefficient:float, coefficient of the filters used for 
-    expanding or reducing the channels.
-    depth_coefficient:float, it is used for repeat the EfficientNet Blocks.
-    depth_divisor:int , it is used for reducing the number of filters.
-    min_depth: int, used for deciding the minimum depth of the filters.
-    drop_connect_rate: used for dropout, to be consistent with 
-    the tensorflow implementation.
+            Parameters
+            ----------
+            pretrained : bool or str
+                Boolean value controls whether to load the default pretrained weights for model.
+                String value represents the hashtag for a certain version of pretrained weights.
+            dropout_rate : float
+                Rate of hidden units to drop.
+            classes : int, number of output classes.
+            width_coefficient : float
+                Coefficient of the filters.
+                Used for expanding or reducing the channels.
+            depth_coefficient : float
+                It is used for repeat the EfficientNet Blocks.
+            depth_divisor:int
+                It is used for reducing the number of filters.
+            min_depth : int
+                Used for deciding the minimum depth of the filters.
+            drop_connect_rate : 
+                Used for dropout.
+                To be consistent with the tensorflow implementation.
 
-    """
+            """
     if pretrained:
         pass
     model = efficientnet(dropout_rate,
@@ -551,25 +565,31 @@ def efficientnet_b2(pretrained=False,
                     ctx=mx.cpu()
                     ):
     r"""EfficientNet model from the
-        `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
-        <https://arxiv.org/abs/1905.11946>`_ paper.
+            `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
+            <https://arxiv.org/abs/1905.11946>`_ paper.
 
-        Parameters
-        ----------
-        pretrained : bool or str
-            Boolean value controls whether to load the default pretrained weights for model.
-            String value represents the hashtag for a certain version of pretrained weights.
-        dropout_rate: float, rate of hidden units to drop.
-        classes: int, number of output classes.
-        width_coefficient:float, coefficient of the filters used for 
-        expanding or reducing the channels.
-        depth_coefficient:float, it is used for repeat the EfficientNet Blocks.
-        depth_divisor:int , it is used for reducing the number of filters.
-        min_depth: int, used for deciding the minimum depth of the filters.
-        drop_connect_rate: used for dropout, to be consistent with 
-        the tensorflow implementation.
+            Parameters
+            ----------
+            pretrained : bool or str
+                Boolean value controls whether to load the default pretrained weights for model.
+                String value represents the hashtag for a certain version of pretrained weights.
+            dropout_rate : float
+                Rate of hidden units to drop.
+            classes : int, number of output classes.
+            width_coefficient : float
+                Coefficient of the filters.
+                Used for expanding or reducing the channels.
+            depth_coefficient : float
+                It is used for repeat the EfficientNet Blocks.
+            depth_divisor:int
+                It is used for reducing the number of filters.
+            min_depth : int
+                Used for deciding the minimum depth of the filters.
+            drop_connect_rate : 
+                Used for dropout.
+                To be consistent with the tensorflow implementation.
 
-        """
+            """
     if pretrained:
         pass
     model = efficientnet(dropout_rate,
@@ -594,25 +614,31 @@ def efficientnet_b3(pretrained=False,
                     ctx=mx.cpu()
                     ):
     r"""EfficientNet model from the
-        `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
-        <https://arxiv.org/abs/1905.11946>`_ paper.
+            `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
+            <https://arxiv.org/abs/1905.11946>`_ paper.
 
-        Parameters
-        ----------
-        pretrained : bool or str
-            Boolean value controls whether to load the default pretrained weights for model.
-            String value represents the hashtag for a certain version of pretrained weights.
-        dropout_rate: float, rate of hidden units to drop.
-        classes: int, number of output classes.
-        width_coefficient:float, coefficient of the filters used for 
-        expanding or reducing the channels.
-        depth_coefficient:float, it is used for repeat the EfficientNet Blocks.
-        depth_divisor:int , it is used for reducing the number of filters.
-        min_depth: int, used for deciding the minimum depth of the filters.
-        drop_connect_rate: used for dropout, to be consistent with 
-        the tensorflow implementation.
+            Parameters
+            ----------
+            pretrained : bool or str
+                Boolean value controls whether to load the default pretrained weights for model.
+                String value represents the hashtag for a certain version of pretrained weights.
+            dropout_rate : float
+                Rate of hidden units to drop.
+            classes : int, number of output classes.
+            width_coefficient : float
+                Coefficient of the filters.
+                Used for expanding or reducing the channels.
+            depth_coefficient : float
+                It is used for repeat the EfficientNet Blocks.
+            depth_divisor:int
+                It is used for reducing the number of filters.
+            min_depth : int
+                Used for deciding the minimum depth of the filters.
+            drop_connect_rate : 
+                Used for dropout.
+                To be consistent with the tensorflow implementation.
 
-        """
+            """
     if pretrained:
         pass
     model = efficientnet(dropout_rate,
@@ -637,25 +663,31 @@ def efficientnet_b4(pretrained=False,
                     ctx=mx.cpu()
                     ):
     r"""EfficientNet model from the
-        `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
-        <https://arxiv.org/abs/1905.11946>`_ paper.
+            `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
+            <https://arxiv.org/abs/1905.11946>`_ paper.
 
-        Parameters
-        ----------
-        pretrained : bool or str
-            Boolean value controls whether to load the default pretrained weights for model.
-            String value represents the hashtag for a certain version of pretrained weights.
-        dropout_rate: float, rate of hidden units to drop.
-        classes: int, number of output classes.
-        width_coefficient:float, coefficient of the filters used for 
-        expanding or reducing the channels.
-        depth_coefficient:float, it is used for repeat the EfficientNet Blocks.
-        depth_divisor:int , it is used for reducing the number of filters.
-        min_depth: int, used for deciding the minimum depth of the filters.
-        drop_connect_rate: used for dropout, to be consistent with 
-        the tensorflow implementation.
+            Parameters
+            ----------
+            pretrained : bool or str
+                Boolean value controls whether to load the default pretrained weights for model.
+                String value represents the hashtag for a certain version of pretrained weights.
+            dropout_rate : float
+                Rate of hidden units to drop.
+            classes : int, number of output classes.
+            width_coefficient : float
+                Coefficient of the filters.
+                Used for expanding or reducing the channels.
+            depth_coefficient : float
+                It is used for repeat the EfficientNet Blocks.
+            depth_divisor:int
+                It is used for reducing the number of filters.
+            min_depth : int
+                Used for deciding the minimum depth of the filters.
+            drop_connect_rate : 
+                Used for dropout.
+                To be consistent with the tensorflow implementation.
 
-        """
+            """
     if pretrained:
         pass
     model = efficientnet(dropout_rate,
@@ -681,25 +713,31 @@ def efficientnet_b5(pretrained=False,
                     ctx=mx.cpu(),
                     ):
     r"""EfficientNet model from the
-        `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
-        <https://arxiv.org/abs/1905.11946>`_ paper.
+            `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
+            <https://arxiv.org/abs/1905.11946>`_ paper.
 
-        Parameters
-        ----------
-        pretrained : bool or str
-            Boolean value controls whether to load the default pretrained weights for model.
-            String value represents the hashtag for a certain version of pretrained weights.
-        dropout_rate: float, rate of hidden units to drop.
-        classes: int, number of output classes.
-        width_coefficient:float, coefficient of the filters used for 
-        expanding or reducing the channels.
-        depth_coefficient:float, it is used for repeat the EfficientNet Blocks.
-        depth_divisor:int , it is used for reducing the number of filters.
-        min_depth: int, used for deciding the minimum depth of the filters.
-        drop_connect_rate: used for dropout, to be consistent with 
-        the tensorflow implementation.
+            Parameters
+            ----------
+            pretrained : bool or str
+                Boolean value controls whether to load the default pretrained weights for model.
+                String value represents the hashtag for a certain version of pretrained weights.
+            dropout_rate : float
+                Rate of hidden units to drop.
+            classes : int, number of output classes.
+            width_coefficient : float
+                Coefficient of the filters.
+                Used for expanding or reducing the channels.
+            depth_coefficient : float
+                It is used for repeat the EfficientNet Blocks.
+            depth_divisor:int
+                It is used for reducing the number of filters.
+            min_depth : int
+                Used for deciding the minimum depth of the filters.
+            drop_connect_rate : 
+                Used for dropout.
+                To be consistent with the tensorflow implementation.
 
-        """
+            """
     if pretrained:
         pass
     model = efficientnet(dropout_rate,
@@ -724,25 +762,31 @@ def efficientnet_b6(pretrained=False,
                     ctx=mx.cpu()
                     ):
     r"""EfficientNet model from the
-        `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
-        <https://arxiv.org/abs/1905.11946>`_ paper.
+            `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
+            <https://arxiv.org/abs/1905.11946>`_ paper.
 
-        Parameters
-        ----------
-        pretrained : bool or str
-            Boolean value controls whether to load the default pretrained weights for model.
-            String value represents the hashtag for a certain version of pretrained weights.
-        dropout_rate: float, rate of hidden units to drop.
-        classes: int, number of output classes.
-        width_coefficient:float, coefficient of the filters used for 
-        expanding or reducing the channels.
-        depth_coefficient:float, it is used for repeat the EfficientNet Blocks.
-        depth_divisor:int , it is used for reducing the number of filters.
-        min_depth: int, used for deciding the minimum depth of the filters.
-        drop_connect_rate: used for dropout, to be consistent with 
-        the tensorflow implementation.
+            Parameters
+            ----------
+            pretrained : bool or str
+                Boolean value controls whether to load the default pretrained weights for model.
+                String value represents the hashtag for a certain version of pretrained weights.
+            dropout_rate : float
+                Rate of hidden units to drop.
+            classes : int, number of output classes.
+            width_coefficient : float
+                Coefficient of the filters.
+                Used for expanding or reducing the channels.
+            depth_coefficient : float
+                It is used for repeat the EfficientNet Blocks.
+            depth_divisor:int
+                It is used for reducing the number of filters.
+            min_depth : int
+                Used for deciding the minimum depth of the filters.
+            drop_connect_rate : 
+                Used for dropout.
+                To be consistent with the tensorflow implementation.
 
-        """
+            """
     if pretrained:
         pass
     model = efficientnet(dropout_rate,
@@ -767,25 +811,31 @@ def efficientnet_b7(pretrained=False,
                     ctx=mx.cpu()
                     ):
     r"""EfficientNet model from the
-    `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
-    <https://arxiv.org/abs/1905.11946>`_ paper.
+            `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"
+            <https://arxiv.org/abs/1905.11946>`_ paper.
 
-    Parameters
-    ----------
-    pretrained : bool or str
-        Boolean value controls whether to load the default pretrained weights for model.
-        String value represents the hashtag for a certain version of pretrained weights.
-    dropout_rate: float, rate of hidden units to drop.
-    classes: int, number of output classes.
-    width_coefficient:float, coefficient of the filters used for 
-    expanding or reducing the channels.
-    depth_coefficient:float, it is used for repeat the EfficientNet Blocks.
-    depth_divisor:int , it is used for reducing the number of filters.
-    min_depth: int, used for deciding the minimum depth of the filters.
-    drop_connect_rate: used for dropout, to be consistent with 
-    the tensorflow implementation.
+            Parameters
+            ----------
+            pretrained : bool or str
+                Boolean value controls whether to load the default pretrained weights for model.
+                String value represents the hashtag for a certain version of pretrained weights.
+            dropout_rate : float
+                Rate of hidden units to drop.
+            classes : int, number of output classes.
+            width_coefficient : float
+                Coefficient of the filters.
+                Used for expanding or reducing the channels.
+            depth_coefficient : float
+                It is used for repeat the EfficientNet Blocks.
+            depth_divisor:int
+                It is used for reducing the number of filters.
+            min_depth : int
+                Used for deciding the minimum depth of the filters.
+            drop_connect_rate : 
+                Used for dropout.
+                To be consistent with the tensorflow implementation.
 
-    """
+            """
     if pretrained:
         pass
     model = efficientnet(dropout_rate,
