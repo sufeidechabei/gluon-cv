@@ -772,13 +772,13 @@ def efficientnet_b7(pretrained=False,
         """
     if pretrained:
         pass
-    model  = efficientnet( dropout_rate,
-                           classes,
-                           width_coefficient,
-                           depth_coefficient,
-                           depth_divisor,
-                           min_depth,
-                           drop_connect_rate,
+    model  = efficientnet(dropout_rate,
+                          classes,
+                          width_coefficient,
+                          depth_coefficient,
+                          depth_divisor,
+                          min_depth,
+                          drop_connect_rate,
                            )
     model.collect_params().initialize(ctx=ctx)
     return model
