@@ -148,21 +148,6 @@ def efficientnet_param():
     return blocks_args
 
 
-def drop_connect(x, p, training):
-    ''' Just to consist of the tensorflow implementation. '''
-
-    if not training:
-        return x
-    batch_size = x.shape[0]
-    keep_prob = 1 - p
-    random_tensor = keep_prob
-    random_tensor += mx.nd.random.uniform(
-        shape=[batch_size, 1, 1, 1]).astype(x.dtype).as_in_context(x.context)  # uniform [0,1)
-    binary_tensor = mx.nd.floor(random_tensor)
-    output = x / keep_prob * binary_tensor
-    return output
-
-
 class SamePadding(HybridBlock):
     def __init__(self, kernel_size, stride, dilation, **kwargs):
         super(SamePadding, self).__init__(**kwargs)
@@ -184,24 +169,8 @@ class SamePadding(HybridBlock):
         pad_w = max((ow - 1) * self.stride[1] +
                     (kw - 1) * self.dilation[1] + 1 - iw, 0)
         if pad_h > 0 or pad_w > 0:
-            x = F.pad(
-                x,
-                mode='constant',
-                pad_width=(
-                    0,
-                    0,
-                    0,
-                    0,
-                    pad_w //
-                    2,
-                    pad_w -
-                    pad_w //
-                    2,
-                    pad_h //
-                    2,
-                    pad_h -
-                    pad_h //
-                    2))
+            x = F.pad(x, mode='constant', pad_width=(0, 0, 0, 0, pad_w//2, pad_w -pad_w//2,
+                                                     pad_h//2, pad_h - pad_h//2))
             return x
         return x
 
@@ -209,14 +178,7 @@ class SamePadding(HybridBlock):
 def _add_conv(out, channels=1, kernel=1, stride=1, pad=0,
               num_group=1, active=True, batchnorm=True):
     out.add(SamePadding(kernel, stride, dilation=(1, 1)))
-    out.add(
-        nn.Conv2D(
-            channels,
-            kernel,
-            stride,
-            pad,
-            groups=num_group,
-            use_bias=False))
+    out.add(nn.Conv2D(channels, kernel, stride, pad, groups=num_group, use_bias=False))
     if batchnorm:
         out.add(nn.BatchNorm(scale=True, momentum=0.99, epsilon=1e-3))
     if active:
@@ -224,16 +186,7 @@ def _add_conv(out, channels=1, kernel=1, stride=1, pad=0,
 
 
 class MBConv(nn.HybridBlock):
-    def __init__(
-            self,
-            in_channels,
-            channels,
-            t,
-            kernel,
-            stride,
-            se_ratio=0,
-            drop_connect_rate=0,
-            **kwargs):
+    def __init__(self, in_channels, channels, t, kernel, stride, se_ratio=0, drop_connect_rate=0, **kwargs):
 
         r"""
             Parameters
@@ -290,6 +243,8 @@ class MBConv(nn.HybridBlock):
                     channels,
                     active=False,
                     batchnorm=True)
+            if drop_connect_rate:
+                self.drop_out = nn.Dropout(drop_connect_rate)
 
     def hybrid_forward(self, F, inputs):
         x = inputs
@@ -301,15 +256,9 @@ class MBConv(nn.HybridBlock):
         out = self.project_layer(out)
         if self.use_shortcut:
             if self.drop_connect_rate:
-                out = drop_connect(
-                    out,
-                    p=self.drop_connect_rate,
-                    training=self.training)
+                out = self.drop_out(out)
             out = F.elemwise_add(out, inputs)
         return out
-
-    def get_mode(self, training):
-        self.training = training
 
 
 class EfficientNet(nn.HybridBlock):
@@ -338,8 +287,7 @@ class EfficientNet(nn.HybridBlock):
             depth_coefficient:float, it is used for repeat the EfficientNet Blocks.
             depth_divisor:int , it is used for reducing the number of filters.
             min_depth: int, used for deciding the minimum depth of the filters.
-            drop_connect_rate: used for dropout, to be consistent with
-            the tensorflow implementation.
+            drop_connect_rate: used for dropout.
 
             """
         super(EfficientNet, self).__init__(**kwargs)
@@ -418,19 +366,12 @@ class EfficientNet(nn.HybridBlock):
             self._dropout = dropout_rate
             self._fc = nn.Dense(num_classes)
 
-    def hybrid_forward(self, F, x, training):
+    def hybrid_forward(self, F, x):
         x = self.features(x)
         for block in self._blocks:
-            block.get_mode(training=training)
             x = block(x)
         x = self._conv_head(x)
-        x = F.squeeze(
-            F.squeeze(
-                mx.nd.contrib.AdaptiveAvgPooling2D(
-                    x,
-                    1),
-                axis=-1),
-            axis=-1)
+        x = F.squeeze(F.squeeze(mx.nd.contrib.AdaptiveAvgPooling2D(x, 1), axis=-1), axis=-1)
         if self._dropout:
             x = F.Dropout(x, self._dropout)
         x = self._fc(x)
@@ -489,7 +430,6 @@ def efficientnet_b0(pretrained=False,
             Used for deciding the minimum depth of the filters.
         drop_connect_rate : float
             Used for dropout.
-            To be consistent with the tensorflow implementation.
 
         """
     if pretrained:
@@ -538,7 +478,6 @@ def efficientnet_b1(pretrained=False,
                 Used for deciding the minimum depth of the filters.
             drop_connect_rate : float
                 Used for dropout.
-                To be consistent with the tensorflow implementation.
 
             """
     if pretrained:
@@ -587,7 +526,6 @@ def efficientnet_b2(pretrained=False,
                 Used for deciding the minimum depth of the filters.
             drop_connect_rate : float
                 Used for dropout.
-                To be consistent with the tensorflow implementation.
 
             """
     if pretrained:
@@ -636,7 +574,6 @@ def efficientnet_b3(pretrained=False,
                 Used for deciding the minimum depth of the filters.
             drop_connect_rate : float
                 Used for dropout.
-                To be consistent with the tensorflow implementation.
 
             """
     if pretrained:
@@ -685,7 +622,6 @@ def efficientnet_b4(pretrained=False,
                 Used for deciding the minimum depth of the filters.
             drop_connect_rate : float
                 Used for dropout.
-                To be consistent with the tensorflow implementation.
 
             """
     if pretrained:
@@ -735,7 +671,6 @@ def efficientnet_b5(pretrained=False,
                 Used for deciding the minimum depth of the filters.
             drop_connect_rate : float
                 Used for dropout.
-                To be consistent with the tensorflow implementation.
 
             """
     if pretrained:
@@ -784,7 +719,6 @@ def efficientnet_b6(pretrained=False,
                 Used for deciding the minimum depth of the filters.
             drop_connect_rate : float
                 Used for dropout.
-                To be consistent with the tensorflow implementation.
 
             """
     if pretrained:
@@ -833,7 +767,6 @@ def efficientnet_b7(pretrained=False,
                 Used for deciding the minimum depth of the filters.
             drop_connect_rate : float
                 Used for dropout.
-                To be consistent with the tensorflow implementation.
 
             """
     if pretrained:
