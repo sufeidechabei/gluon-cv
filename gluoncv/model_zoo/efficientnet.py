@@ -186,7 +186,7 @@ def _add_conv(out, channels=1, kernel=1, stride=1, pad=0,
 
 
 class MBConv(nn.HybridBlock):
-    def __init__(self, in_channels, channels, t, kernel, stride, se_ratio=0, 
+    def __init__(self, in_channels, channels, t, kernel, stride, se_ratio=0,
                  drop_connect_rate=0, **kwargs):
 
         r"""
