@@ -365,7 +365,7 @@ class EfficientNet(nn.HybridBlock):
                     batchnorm=True)
             # Final linear layer
             self._dropout = dropout_rate
-            self._fc = nn.Dense(num_classes)
+            self._fc = nn.Dense(num_classes, use_bias=False)
 
     def hybrid_forward(self, F, x):
         x = self.features(x)
