@@ -22,7 +22,7 @@ import math
 import collections
 import re
 import mxnet as mx
-from mxnet.gluon.block import HybridBlock
+from mxnet.gluon.block import Block
 from mxnet.gluon import nn
 # Parameters for the entire model (stem, all blocks, and head)
 
@@ -148,7 +148,7 @@ def efficientnet_param():
     return blocks_args
 
 
-class SamePadding(HybridBlock):
+class SamePadding(Block):
     def __init__(self, kernel_size, stride, dilation, **kwargs):
         super(SamePadding, self).__init__(**kwargs)
         if isinstance(kernel_size, int):
@@ -159,7 +159,7 @@ class SamePadding(HybridBlock):
         self.stride = stride
         self.dilation = dilation
 
-    def hybrid_forward(self, F, x):
+    def forward(self, F, x):
         ih, iw = x.shape[-2:]
         kh, kw = self.kernel_size
         sh, sw = self.stride
@@ -185,7 +185,7 @@ def _add_conv(out, channels=1, kernel=1, stride=1, pad=0,
         out.add(nn.Swish())
 
 
-class MBConv(nn.HybridBlock):
+class MBConv(nn.Block):
     def __init__(self, in_channels, channels, t, kernel, stride, se_ratio=0,
                  drop_connect_rate=0, **kwargs):
 
@@ -205,7 +205,7 @@ class MBConv(nn.HybridBlock):
         self.se_ratio = se_ratio
         self.drop_connect_rate = drop_connect_rate
         with self.name_scope():
-            self.out = nn.HybridSequential(prefix="out_")
+            self.out = nn.Sequential(prefix="out_")
             with self.out.name_scope():
                 if t != 1:
                     _add_conv(
@@ -223,8 +223,8 @@ class MBConv(nn.HybridBlock):
                     batchnorm=True)
             if se_ratio:
                 num_squeezed_channels = max(1, int(in_channels * se_ratio))
-                self._se_reduce = nn.HybridSequential(prefix="se_reduce_")
-                self._se_expand = nn.HybridSequential(prefix="se_expand_")
+                self._se_reduce = nn.Sequential(prefix="se_reduce_")
+                self._se_expand = nn.Sequential(prefix="se_expand_")
                 with self._se_reduce.name_scope():
                     _add_conv(
                         self._se_reduce,
@@ -237,7 +237,7 @@ class MBConv(nn.HybridBlock):
                         in_channels * t,
                         active=False,
                         batchnorm=False)
-            self.project_layer = nn.HybridSequential(prefix="project_layer_")
+            self.project_layer = nn.Sequential(prefix="project_layer_")
             with self.project_layer.name_scope():
                 _add_conv(
                     self.project_layer,
@@ -247,7 +247,7 @@ class MBConv(nn.HybridBlock):
             if drop_connect_rate:
                 self.drop_out = nn.Dropout(drop_connect_rate)
 
-    def hybrid_forward(self, F, inputs):
+    def forward(self, F, inputs):
         x = inputs
         x = self.out(x)
         if self.se_ratio:
@@ -262,7 +262,7 @@ class MBConv(nn.HybridBlock):
         return out
 
 
-class EfficientNet(nn.HybridBlock):
+class EfficientNet(nn.Block):
 
     def __init__(self, blocks_args=None,
                  dropout_rate=None,
