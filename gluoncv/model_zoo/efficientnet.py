@@ -297,7 +297,7 @@ class EfficientNet(nn.Block):
         self._blocks_args = blocks_args
         self.input_size = None
         with self.name_scope():
-            self.features = nn.HybridSequential(prefix='features_')
+            self.features = nn.Sequential(prefix='features_')
             with self.features.name_scope():
                 # stem conv
                 out_channels = round_filters(32,
@@ -311,7 +311,7 @@ class EfficientNet(nn.Block):
                     stride=2,
                     active=True,
                     batchnorm=True)
-            self._blocks = nn.HybridSequential(prefix='blocks_')
+            self._blocks = nn.Sequential(prefix='blocks_')
             with self._blocks.name_scope():
                 for block_arg in self._blocks_args:
                     # Update block input and output filters based on depth
@@ -356,7 +356,7 @@ class EfficientNet(nn.Block):
             # Head
             out_channels = round_filters(1280, width_coefficient,
                                          depth_divisor, min_depth)
-            self._conv_head = nn.HybridSequential(prefix='conv_head_')
+            self._conv_head = nn.Sequential(prefix='conv_head_')
             with self._conv_head.name_scope():
                 _add_conv(
                     self._conv_head,
