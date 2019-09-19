@@ -367,7 +367,7 @@ class EfficientNet(nn.Block):
             self._dropout = dropout_rate
             self._fc = nn.Dense(num_classes, use_bias=False)
 
-    def hybrid_forward(self, F, x):
+    def forward(self, F, x):
         x = self.features(x)
         for block in self._blocks:
             x = block(x)
